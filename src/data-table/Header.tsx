@@ -3,6 +3,7 @@ import * as React from 'react';
 import './DataTable.css';
 import { DataTableConfig } from './interfaces';
 import Cell from './Cell';
+import HeaderCell from './HeaderCell';
 
 // interface IHeaderProps {
 //   enableColumnReorder?: boolean;
@@ -29,7 +30,7 @@ class Header extends React.Component<DataTableConfig, any> {
     return (
       <section className="DataTableHeader">
         {
-          columns.filter(col => col.visible).map((col, idx) => <Cell key={idx} align={col.align} data={col.displayName} />)
+          columns.filter(col => col.visible).map((col, idx) => <HeaderCell key={idx} align={col.align} data={col.displayName} />)
         }
       </section>
     );

@@ -1,12 +1,12 @@
 .DataTableRoot {
   background: #77777733;
-
   display: grid;
-  grid-gap: 25px;
 }
 
 .DataTableFooter {
+  display: grid;
   border: 2px solid red;
+  background: red;
 }
 
 .DataTableHeader {
@@ -18,9 +18,6 @@
   display: grid;
   grid-template-columns: 1fr;
   align-items: center;
-
-  height: 100px;
-  
   background: red;
 }
 
@@ -35,6 +32,11 @@
 .DataCell {
   background: green;
   padding: 16px;
+}
+
+.HeaderDataCell {
+  padding: 16px;
+  font-size: 1.2em;
 }
 
 .justify-left {

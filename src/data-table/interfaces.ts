@@ -11,9 +11,10 @@ interface IDataTableProps {
 
 interface  IDataTableColumn {
   displayName: string;
-  fieldName: string;
   visible: boolean;
   align: alignment;
+  fieldName: string;
+  componentType: any;
 }
 
 interface ICell {
