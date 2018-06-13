@@ -3,6 +3,7 @@ import './App.css';
 import DataTable from './data-table/DataTable';
 import Column from './data-table/models/Column';
 import Cell from './data-table/Cell';
+import { IDataTableProps } from './data-table/interfaces';
 
 const logo = require('./logo.svg');
 
@@ -20,9 +21,8 @@ interface IrfList {
 }
 
 const TestCell = (props: any) => {
-  console.log(props);
   return (
-    <div className="DataCell">
+    <div className="DataCell2">
       <a href={props.row.viewUrl}>View</a>
       <a href={props.row.editUrl}>Edit</a>
       <a href={props.row.deleteUrl}>Delete</a>
@@ -30,7 +30,7 @@ const TestCell = (props: any) => {
   );
 };
 
-let dataTableConfig = {
+let dataTableConfig: IDataTableProps<IrfList> = {
   columns: [
     new Column<IrfList>('IRF Number', 'irfNumber', {align: 'left'}),
     new Column<IrfList>('Staff Name', 'staffName', {align: 'left'}),
@@ -38,7 +38,7 @@ let dataTableConfig = {
     new Column<IrfList>('# of Traffickers', 'numberOfTraffickers', {align: 'center'}),
     new Column<IrfList>('Time of Interception', 'datetimeOfInterception', {align: 'right'}),
     new Column<IrfList>('Time Entered Into System', 'datetimeEnteredIntoSystem', {align: 'right'}),
-    new Column<any>('Actions', '', {align: 'center', componentType: TestCell}),
+    new Column<any>('Actions', '', {align: 'center', CellComponent: TestCell}),
   ],
   data: [
     {
@@ -127,7 +127,16 @@ let dataTableConfig = {
     }
   ],
   configuration: {
-
+    header: {
+      visible: true,
+    },
+    row: {
+      OnRowClick: (row) => console.log('the row has been clicked!', row),
+    },
+    pagination: {
+      enabled: true,
+      pageSize: 2
+    }
   }
 };
 

@@ -8,23 +8,20 @@ import HeaderCell from './HeaderCell';
 // interface IHeaderProps {
 //   enableColumnReorder?: boolean;
 //   enableSort?: boolean;
-//   hasMenu?: boolean;
-//   hideTableHeader?: boolean;
 //   ignoreGroupOrder?: boolean;
-//   menuName?: boolean;
-//   showColumnOptions?: boolean;
+
 //   sortCallback?: boolean;
 
-//   tableColumns?: Array<DataTableColumn>;
-//   tableData?: Array<DataTableData>;
-  
+//   hasMenu?: boolean;
+//   menuName?: boolean;
+
+//   showColumnOptions?: boolean;
 //   tableGroup?: boolean;
 //   tableGroupedData?: boolean;
-  
 //   groupByChanged?: Function;
 // }
 
-class Header extends React.Component<DataTableConfig, any> {
+class Header<T> extends React.Component<DataTableConfig<T>, any> {
   render() {
     let { columns } = this.props.config;
     return (

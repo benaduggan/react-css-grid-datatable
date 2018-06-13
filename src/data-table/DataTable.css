@@ -5,13 +5,14 @@
 
 .DataTableFooter {
   display: grid;
-  border: 2px solid red;
-  background: red;
+  grid-template-columns: 100px 1fr 100px;
+  border: 2px solid black;
 }
 
 .DataTableHeader {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  border-bottom: black solid 2px;
 }
 
 .DataTableBody { 
@@ -22,7 +23,7 @@
 }
 
 .DataRow {
-  background: blue;
+  background: gray;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
   align-items: center;
@@ -30,7 +31,13 @@
 }
 
 .DataCell {
-  background: green;
+  padding: 16px;
+}
+
+.DataCell2 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
+  grid-gap: 10px;
   padding: 16px;
 }
 
