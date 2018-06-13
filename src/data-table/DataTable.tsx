@@ -55,20 +55,19 @@ class DataTable<T> extends React.Component<DataTableConfig<T>, any> {
 
   handleNextPage() {
     this.paginator.nextPage();
-    this.updatePage();
   }
   
   handlePreviousPage() {
     this.paginator.previousPage();
-    this.updatePage();
   }
   
   handlePageClick(page: number) {
     this.paginator.setPage(page + 1);
-    this.updatePage();
   }
 
-  updatePage() {
+  updatePage(handler: () => any) {
+    handler();
+
     this.setState({
       currentPage: this.paginator.currentPage()
     });
@@ -81,13 +80,15 @@ class DataTable<T> extends React.Component<DataTableConfig<T>, any> {
         <Body rows={this.state.currentPage} config={this.props.config} />
 
         <section className="DataTableFooter">
-          <button disabled={!this.paginator.CanSetPreviousPage} onClick={() => this.handlePreviousPage()}>Previous</button>
+          <button disabled={!this.paginator.CanSetPreviousPage} onClick={() => this.updatePage(this.handlePreviousPage)}>Previous</button>
           <section>
             {
-              Array.apply(null, { length: this.paginator.NumberOfPages }).map((num: any, key: any) => <button onClick={() => this.handlePageClick(key)} key={key}>{key}</button>)
+              Array.apply(null, { length: this.paginator.NumberOfPages })
+                   .map((num: any, key: any) => 
+                      <button onClick={() => this.updatePage(() => this.handlePageClick(key))} key={key}>{key + 1}</button>)
             }
           </section>
-          <button disabled={!this.paginator.CanSetNextPage} onClick={() => this.handleNextPage()}>Next</button>
+          <button disabled={!this.paginator.CanSetNextPage} onClick={() => this.updatePage(this.handleNextPage)}>Next</button>
         </section>
       </section>
     );
