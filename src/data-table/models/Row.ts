@@ -1,14 +1,11 @@
 import { IRowConfig } from '../interfaces';
 import Cell from '../Cell';
-
-let defaultOptions: IRowConfig<any> = {
-    OnRowClick: () => {},
-};
+import { DEFAULT_ROW_OPTIONS } from './TableSettings';
 
 export default class Header<T> implements IRowConfig<T> {
     public OnRowClick: (row: T) => any;
 
-  constructor(options: IRowConfig<T> = {}) {
-    Object.assign(this, {...defaultOptions, ...options});
+  constructor(options: IRowConfig<T>) {
+    Object.assign(this, {...DEFAULT_ROW_OPTIONS, ...options});
   }
 }

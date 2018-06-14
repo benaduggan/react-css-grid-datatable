@@ -2,9 +2,10 @@ import * as React from 'react';
 
 import './DataTable.css';
 import Header from './Header';
-import { DataTableConfig } from './interfaces';
+import { DataTableConfig, IDataTableProps } from './interfaces';
 import Body from './Body';
 import Paginator from './Paginator';
+import TableSettings from './models/TableSettings';
 
 // let bindings = {
 //   canFilterActives: '=',
@@ -14,13 +15,15 @@ import Paginator from './Paginator';
 //   enableGrouping: '=',
 //   enableSort: '=',
 //   hasMenu: '=',
-//   hideTableHeader: '=',
 //   isLoading: '=',
-//   maxPage: '=',
 //   menuName: '=',
+
+
+//   maxPage: '=',
 //   nextPage: '&',
 //   pageSize: '=',
 //   prevPage: '&',
+
 //   removableRows: '=',
 //   showColumnOptions: '=',
   
@@ -32,17 +35,21 @@ import Paginator from './Paginator';
   
 //   dropFunction: '&',
 //   groupByChanged: '&',
-//   rowClick: '&',
 //   sortCallback: '&',
 // };
 
 
+
+
 class DataTable<T> extends React.Component<DataTableConfig<T>, any> {
   public paginator: Paginator<T>;
+  public settings: TableSettings<T>;
+
   constructor (props: DataTableConfig<T>) {
     super(props);
     
-    this.paginator = new Paginator<T>(this.props.config.configuration.pagination, this.props.config.data);
+    this.settings = new TableSettings(props);
+    this.paginator = new Paginator<T>(this.settings.configuration.pagination, this.settings.data);
 
     this.state = {
       currentPage: this.paginator.currentPage()
@@ -76,8 +83,8 @@ class DataTable<T> extends React.Component<DataTableConfig<T>, any> {
   render() {
     return (
       <section className="DataTableRoot">
-        <Header config={this.props.config} />
-        <Body rows={this.state.currentPage} config={this.props.config} />
+        <Header config={this.settings}/>
+        <Body rows={this.state.currentPage} config={this.settings} />
 
         <section className="DataTableFooter">
           <button disabled={!this.paginator.CanSetPreviousPage} onClick={() => this.updatePage(this.handlePreviousPage)}>Previous</button>

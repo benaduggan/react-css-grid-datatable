@@ -1,18 +1,15 @@
 import { IDataTableColumn, alignment, IHeaderConfig } from '../interfaces';
 import Cell from '../Cell';
+import { DEFAULT_HEADER_OPTIONS } from './TableSettings';
 
-let defaultOptions: IHeaderConfig = {
-  visible: true,
-  align: 'left',
-  CellComponent: Cell
-};
 
-export default class Header<T> implements IHeaderConfig {
-  public hideTableHeader: boolean;
+export default class Header<T> implements IHeaderConfig<T> {
+  public visible: boolean;
+  public SortCallback: (fieldname: keyof Extract<T, string>, data: T[]) => void;
   public align: alignment;
   public CellComponent: any;
 
-  constructor(public displayName: string, public fieldName: Extract<keyof T, string>, options: IHeaderConfig = {}) {
-    Object.assign(this, {...defaultOptions, ...options});
+  constructor(public displayName: string, public fieldName: Extract<keyof T, string>, options: IHeaderConfig<T>) {
+    Object.assign(this, {...DEFAULT_HEADER_OPTIONS, ...options});
   }
 }

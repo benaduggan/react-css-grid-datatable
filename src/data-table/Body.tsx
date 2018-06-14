@@ -8,10 +8,6 @@ import Cell from './Cell';
 import Column from './models/Column';
 import Row from './models/Row';
 
-let rowDefaults: IRowConfig<any> = {
-  OnRowClick: () => {},
-};
-
 interface IBodyProps<T> {
   config: IDataTableProps<T>;
   rows: Array<T>;

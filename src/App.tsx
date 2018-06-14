@@ -3,7 +3,7 @@ import './App.css';
 import DataTable from './data-table/DataTable';
 import Column from './data-table/models/Column';
 import Cell from './data-table/Cell';
-import { IDataTableProps } from './data-table/interfaces';
+import { IDataTableProps, IHeaderConfig, IRowConfig, IPaginationConfig, DeepPartial } from './data-table/interfaces';
 
 const logo = require('./logo.svg');
 
@@ -30,7 +30,7 @@ const TestCell = (props: any) => {
   );
 };
 
-let dataTableConfig: IDataTableProps<IrfList> = {
+let dataTableConfig: DeepPartial<IDataTableProps<IrfList>> = {
   columns: [
     new Column<IrfList>('IRF Number', 'irfNumber', {align: 'left'}),
     new Column<IrfList>('Staff Name', 'staffName', {align: 'left'}),
@@ -128,14 +128,15 @@ let dataTableConfig: IDataTableProps<IrfList> = {
   ],
   configuration: {
     header: {
-      visible: true,
-    },
+      visible: false,
+      SortCallback: (fieldname, data) => data.sort()
+    } as Partial<IHeaderConfig<IrfList>>,
     row: {
-      OnRowClick: (row) => console.log('the row has been clicked!', row),
+      OnRowClick: (row: IrfList) => console.log('the row has been clicked!', row),
     },
     pagination: {
       enabled: true,
-      pageSize: 2
+      // pageSize: 3
     }
   }
 };
@@ -152,7 +153,7 @@ class App extends React.Component {
         <p className="App-intro">
           To get started, edit <code>src/App.tsx</code> and save to reload. hello
         </p>
-        <DataTable config={dataTableConfig} />
+        <DataTable config={dataTableConfig}/>
       </div>
     );
   }

@@ -1,7 +1,16 @@
+export type DeepPartial<T> = {
+  [P in keyof T]?: T[P] extends Array<infer U>
+    ? Array<DeepPartial<U>>
+    // tslint:disable-next-line:no-shadowed-variable
+    : T[P] extends ReadonlyArray<infer U>
+      ? ReadonlyArray<DeepPartial<U>>
+      : DeepPartial<T[P]>
+};
+
 export type alignment = 'left' | 'right' | 'center';
 
 export interface DataTableConfig<T> {
-  config: IDataTableProps<T>;
+  config: DeepPartial<IDataTableProps<T>>;
 }
 
 export interface IDataTableProps<T> {
@@ -11,24 +20,25 @@ export interface IDataTableProps<T> {
 }
 
 export interface IDataTableConfiguration<T> {
-  header?: IHeaderConfig;
-  row?: IRowConfig<T>;
-  pagination?: IPaginationConfig;
+  header: IHeaderConfig<T>;
+  row: IRowConfig<T>;
+  pagination: IPaginationConfig;
 }
 
 export interface IPaginationConfig {
-  enabled?: boolean;
-  pageSize?: number;
+  enabled: boolean;
+  pageSize: number;
 }
 
 export interface IRowConfig<T> {
-  OnRowClick?: (row: T) => any;
+  OnRowClick: (row: T) => any;
 }
 
-export interface IHeaderConfig {
-  visible?: boolean;
-  align?: alignment;
-  CellComponent?: any;
+export interface IHeaderConfig<T> {
+  visible: boolean;
+  align: alignment;
+  CellComponent: any;
+  SortCallback: (fieldname: keyof Extract<T, string>, data: Array<T>) => void;
 }
 
 export interface IDataTableColumn {
@@ -42,4 +52,5 @@ export interface IDataTableColumn {
 export interface ICell {
   align: alignment;
   data: any;
+  OnClick: any;
 }
