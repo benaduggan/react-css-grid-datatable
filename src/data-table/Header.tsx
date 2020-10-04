@@ -31,9 +31,11 @@ class Header<T> extends React.Component<HeaderProps<T>, any> {
     let sortCallback = this.props.config.configuration.header.SortCallback;
     return (
       <section className="DataTableHeader">
-        {
-          columns.filter(col => col.visible).map((col, idx) => <HeaderCell OnClick={sortCallback} key={idx} align={col.align} data={col.displayName} />)
-        }
+        {columns
+          .filter((col) => col.visible)
+          .map((col, idx) => (
+            <HeaderCell OnClick={sortCallback} key={idx} align={col.align} data={col.displayName} />
+          ))}
       </section>
     );
   }

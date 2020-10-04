@@ -15,7 +15,7 @@
   border-bottom: black solid 2px;
 }
 
-.DataTableBody { 
+.DataTableBody {
   display: grid;
   grid-template-columns: 1fr;
   align-items: center;

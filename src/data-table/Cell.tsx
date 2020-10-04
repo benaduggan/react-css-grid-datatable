@@ -9,15 +9,11 @@ class Cell extends React.Component<ICell, any> {
     let { align, data } = this.props;
     let condtionalClasses = {
       'justify-left': align === 'left',
-      'justify-right': align === 'right'
+      'justify-right': align === 'right',
     };
-    
+
     let classes = classnames('DataCell', condtionalClasses);
-    return (
-      <section className={classes}>
-        {data}
-      </section>
-    );
+    return <section className={classes}>{data}</section>;
   }
 }
 
