@@ -19,24 +19,28 @@ class Body<T> extends React.Component<IBodyProps<T>, any> {
     let { columns } = this.props.config;
     return (
       <section className="DataTableBody">
-        {
-          rows.map((row, idx) => {
-            return this.createRow(row, columns, idx);
-          })
-        }
+        {rows.map((row, idx) => {
+          return this.createRow(row, columns, idx);
+        })}
       </section>
     );
   }
-  
+
   createRow(row: any, columns: Array<Column<any>>, key: any) {
     let rowModel = new Row(this.props.config.configuration.row);
     return (
       <section className="DataRow" key={key} onClick={() => rowModel.OnRowClick(row)}>
-        {
-          columns.filter(col => col.visible).map((col, idx2) => 
-            <col.CellComponent key={idx2} align={col.align} data={row[col.fieldName]} row={row} col={col}/>
-          )
-        }
+        {columns
+          .filter((col) => col.visible)
+          .map((col, idx2) => (
+            <col.CellComponent
+              key={idx2}
+              align={col.align}
+              data={row[col.fieldName]}
+              row={row}
+              col={col}
+            />
+          ))}
       </section>
     );
   }

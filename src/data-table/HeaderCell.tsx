@@ -7,7 +7,7 @@ import Cell from './Cell';
 
 class HeaderCell extends Cell {
   render() {
-    let { align, data, OnClick} = this.props;
+    let { align, data, OnClick } = this.props;
 
     if (OnClick === undefined) {
       OnClick = () => {};
@@ -15,9 +15,9 @@ class HeaderCell extends Cell {
 
     let condtionalClasses = {
       'justify-left': align === 'left',
-      'justify-right': align === 'right'
+      'justify-right': align === 'right',
     };
-    
+
     let classes = classnames('HeaderDataCell', condtionalClasses);
     return (
       <section className={classes} onClick={() => OnClick()}>
